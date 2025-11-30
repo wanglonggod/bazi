@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>八字计算测试</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>八字计算测试</h1>
+    <div id="result"></div>
+    
+    <script type="module">
+        import BaziCalculator from './src/utils/baziCalculator.js';
+        
+        const calculator = new BaziCalculator();
+        const resultDiv = document.getElementById('result');
+        
+        // 测试1990年1月27日
+        try {
+            const birthInfo = {
+                year: 1990,
+                month: 1,
+                day: 27,
+                hour: 12,
+                minute: 0,
+                gender: 'male'
+            };
+            
+            const result = calculator.calculateBazi(birthInfo);
+            
+            resultDiv.innerHTML = `
+                <h2>测试结果：1990年1月27日 12:00</h2>
+                <p><strong>年柱：</strong> ${result.yearPillar.full} (${result.yearPillar.element})</p>
+                <p><strong>月柱：</strong> ${result.monthPillar.full} (${result.monthPillar.element})</p>
+                <p><strong>日柱：</strong> ${result.dayPillar.full} (${result.dayPillar.element})</p>
+                <p><strong>时柱：</strong> ${result.hourPillar.full} (${result.hourPillar.element})</p>
+                <hr>
+                <p><strong>预期结果：</strong></p>
+                <p>年柱：己巳 (土)</p>
+                <p>月柱：丁丑 (火)</p>
+                <p>日柱：壬辰 (水)</p>
+                <p>时柱：丙午 (火) - 12:00应该是午时</p>
+            `;
+            
+            // 验证日柱
+            if (result.dayPillar.full === '壬辰') {
+                resultDiv.innerHTML += '<p style="color: green;">✓ 日柱正确</p>';
+            } else {
+                resultDiv.innerHTML += `<p style="color: red;">✗ 日柱错误：期望壬辰，得到${result.dayPillar.full}</p>`;
+            }
+            
+            // 验证时柱
+            if (result.hourPillar.full === '丙午') {
+                resultDiv.innerHTML += '<p style="color: green;">✓ 时柱正确</p>';
+            } else {
+                resultDiv.innerHTML += `<p style="color: red;">✗ 时柱错误：期望丙午，得到${result.hourPillar.full}</p>`;
+            }
+            
+        } catch (error) {
+            resultDiv.innerHTML = `<p style="color: red;">错误：${error.message}</p>`;
+        }
+    </script>
+</body>
+</html>

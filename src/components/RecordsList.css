@@ -1,0 +1,302 @@
+/* 测算记录列表样式 */
+.records-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.records-modal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+  overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.records-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.records-modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.records-content {
+  color: white;
+}
+
+.loading-message,
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.empty-message p {
+  margin: 10px 0;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff4757;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.record-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.record-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.record-title {
+  flex: 1;
+}
+
+.bazi-text {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #ffd700;
+}
+
+.date-text {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.record-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-btn,
+.delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.view-btn {
+  background-color: rgba(255, 215, 0, 0.8);
+  color: #333;
+}
+
+.view-btn:hover {
+  background-color: #ffd700;
+}
+
+.delete-btn {
+  background-color: rgba(255, 71, 87, 0.8);
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #ff4757;
+}
+
+.record-summary {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.record-summary p {
+  margin: 5px 0;
+}
+
+.record-summary strong {
+  color: #ffd700;
+}
+
+/* 详情模态框 */
+.record-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.record-detail-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  color: white;
+}
+
+.record-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.record-detail-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.record-detail-body {
+  line-height: 1.6;
+}
+
+.detail-section {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-section h4 {
+  margin: 0 0 15px 0;
+  color: #ffd700;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.detail-section p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.detail-section strong {
+  color: #ffd700;
+}
+
+.analysis-content {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .records-modal {
+    padding: 20px;
+    margin: 20px;
+    max-height: 90vh;
+  }
+  
+  .record-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .record-actions {
+    align-self: flex-end;
+  }
+  
+  .record-detail-content {
+    padding: 20px;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .records-modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .bazi-text {
+    font-size: 16px;
+  }
+  
+  .view-btn,
+  .delete-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}

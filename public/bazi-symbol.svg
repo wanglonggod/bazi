@@ -1,0 +1,40 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 太极图 -->
+  <circle cx="50" cy="50" r="45" stroke="#000" stroke-width="2" fill="white"/>
+  <!-- 左半圆 -->
+  <path d="M50 5 C24.5 5 5 24.5 5 50 C5 75.5 24.5 95 50 95 L50 50 Z" fill="#333"/>
+  <!-- 右眼白 -->
+  <circle cx="50" cy="25" r="7" fill="white"/>
+  <!-- 右眼黑 -->
+  <circle cx="50" cy="25" r="3" fill="#333"/>
+  <!-- 左眼白 -->
+  <circle cx="50" cy="75" r="7" fill="#333"/>
+  <!-- 左眼黑 -->
+  <circle cx="50" cy="75" r="3" fill="white"/>
+  
+  <!-- 八卦爻 -->
+  <!-- 上方 -->
+  <g transform="translate(50, 15)">
+    <line x1="-15" y1="0" x2="15" y2="0" stroke="#333" stroke-width="2"/>
+    <line x1="-15" y1="6" x2="15" y2="6" stroke="#333" stroke-width="2"/>
+    <line x1="-15" y1="-6" x2="15" y2="-6" stroke="#333" stroke-width="2"/>
+  </g>
+  <!-- 下方 -->
+  <g transform="translate(50, 85)">
+    <line x1="-15" y1="0" x2="15" y2="0" stroke="#333" stroke-width="2"/>
+    <line x1="-15" y1="6" x2="15" y2="6" stroke="#333" stroke-width="2"/>
+    <line x1="-15" y1="-6" x2="15" y2="-6" stroke="#333" stroke-width="2"/>
+  </g>
+  <!-- 左方 -->
+  <g transform="translate(15, 50)">
+    <line x1="0" y1="-15" x2="0" y2="15" stroke="#333" stroke-width="2"/>
+    <line x1="6" y1="-15" x2="6" y2="15" stroke="#333" stroke-width="2"/>
+    <line x1="-6" y1="-15" x2="-6" y2="15" stroke="#333" stroke-width="2"/>
+  </g>
+  <!-- 右方 -->
+  <g transform="translate(85, 50)">
+    <line x1="0" y1="-15" x2="0" y2="15" stroke="#333" stroke-width="2"/>
+    <line x1="6" y1="-15" x2="6" y2="15" stroke="#333" stroke-width="2"/>
+    <line x1="-6" y1="-15" x2="-6" y2="15" stroke="#333" stroke-width="2"/>
+  </g>
+</svg>

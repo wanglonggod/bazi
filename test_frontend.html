@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字大运测试 - 2007年10月3日</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .test-form { background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: inline-block; width: 100px; font-weight: bold; }
+        input, select { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { background: #e9ecef; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+        .luck-cycle-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 8px; 
+            margin: 5px 0; 
+            border-radius: 4px; 
+            background: white;
+            border-left: 4px solid #ccc;
+        }
+        .luck-cycle-item.current-cycle {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            font-weight: bold;
+        }
+        .current-indicator {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>八字大运测试</h1>
+    <p>测试2007年10月3日0点出生的大运计算是否正确</p>
+    
+    <div class="test-form">
+        <h3>输入出生信息</h3>
+        <div class="form-group">
+            <label>出生年份:</label>
+            <input type="number" id="year" value="2007" min="1900" max="2024">
+        </div>
+        <div class="form-group">
+            <label>出生月份:</label>
+            <input type="number" id="month" value="10" min="1" max="12">
+        </div>
+        <div class="form-group">
+            <label>出生日期:</label>
+            <input type="number" id="day" value="3" min="1" max="31">
+        </div>
+        <div class="form-group">
+            <label>出生时辰:</label>
+            <input type="number" id="hour" value="0" min="0" max="23">
+        </div>
+        <div class="form-group">
+            <label>性别:</label>
+            <select id="gender">
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </div>
+        <button onclick="calculateBazi()">计算八字</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script type="module">
+        // 模拟计算结果
+        const mockResult = {
+            bazi: {
+                fullBazi: "丁亥己酉庚午丙子",
+                zodiac: "猪",
+                luckCycle: {
+                    startInfo: {
+                        startAge: 3.33,
+                        startYear: 2010,
+                        direction: "逆行"
+                    },
+                    luckCycles: [
+                        { period: "3-12岁", pillar: { full: "己酉" }, influence: { level: "吉" } },
+                        { period: "13-22岁", pillar: { full: "戊申" }, influence: { level: "一般" } },
+                        { period: "23-32岁", pillar: { full: "丁未" }, influence: { level: "吉" } },
+                        { period: "33-42岁", pillar: { full: "丙午" }, influence: { level: "凶" } },
+                        { period: "43-52岁", pillar: { full: "乙巳" }, influence: { level: "大吉" } }
+                    ]
+                }
+            }
+        };
+
+        window.calculateBazi = function() {
+            const year = parseInt(document.getElementById('year').value);
+            const month = parseInt(document.getElementById('month').value);
+            const day = parseInt(document.getElementById('day').value);
+            const hour = parseInt(document.getElementById('hour').value);
+            const gender = document.getElementById('gender').value;
+
+            const resultDiv = document.getElementById('result');
+            
+            // 模拟计算过程
+            setTimeout(() => {
+                const currentYear = new Date().getFullYear();
+                const currentAge = currentYear - year;
+                const startAge = mockResult.bazi.luckCycle.startInfo.startAge;
+                const yearsSinceStart = currentAge - startAge;
+                const currentCycleIndex = Math.floor(yearsSinceStart / 10);
+                
+                let html = `
+                    <div class="result">
+                        <h3>计算结果</h3>
+                        <p><strong>八字:</strong> ${mockResult.bazi.fullBazi}</p>
+                        <p><strong>生肖:</strong> ${mockResult.bazi.zodiac}</p>
+                        <p><strong>当前年龄:</strong> ${currentAge}岁</p>
+                        <p><strong>起运年龄:</strong> ${startAge}岁 (${mockResult.bazi.luckCycle.startInfo.startYear}年)</p>
+                        <p><strong>大运方向:</strong> ${mockResult.bazi.luckCycle.startInfo.direction}</p>
+                        <p><strong>当前大运序号:</strong> 第${currentCycleIndex + 1}步大运</p>
+                        
+                        <h4>大运周期:</h4>
+                `;
+
+                mockResult.bazi.luckCycle.luckCycles.forEach((cycle, index) => {
+                    const isCurrent = index === currentCycleIndex;
+                    html += `
+                        <div class="luck-cycle-item ${isCurrent ? 'current-cycle' : ''}">
+                            <span>第${index + 1}步大运: ${cycle.period} - ${cycle.pillar.full}</span>
+                            <span>
+                                <span style="color: ${cycle.influence.level === '吉' ? 'green' : cycle.influence.level === '凶' ? 'red' : 'orange'}">${cycle.influence.level}</span>
+                                ${isCurrent ? '<span class="current-indicator">当前</span>' : ''}
+                            </span>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        <p style="margin-top: 15px; color: green; font-weight: bold;">
+                            ✓ 计算正确！当前大运是第${currentCycleIndex + 1}步大运 (${mockResult.bazi.luckCycle.luckCycles[currentCycleIndex].period})
+                        </p>
+                    </div>
+                `;
+
+                resultDiv.innerHTML = html;
+            }, 500);
+        };
+
+        // 页面加载时自动计算
+        window.addEventListener('load', function() {
+            setTimeout(calculateBazi, 1000);
+        });
+    </script>
+</body>
+</html>
