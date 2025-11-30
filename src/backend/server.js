@@ -195,12 +195,37 @@ app.use(authMiddleware.errorHandler);
 
 // 静态文件服务（用于生产环境）
 if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../../../dist');
-  app.use(express.static(distPath));
+  // 尝试多个路径来找到dist目录
+  const possibleDistPaths = [
+    path.join(__dirname, '../../../dist'), // 开发环境路径
+    path.join(__dirname, '../../dist'),   // 生产环境路径
+    path.join(__dirname, '../dist'),      // 备用路径
+    path.join(process.cwd(), 'dist')       // 当前工作目录
+  ];
   
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-  });
+  let distPath = null;
+  for (const tryPath of possibleDistPaths) {
+    try {
+      const fs = await import('fs');
+      if (fs.existsSync(tryPath)) {
+        distPath = tryPath;
+        break;
+      }
+    } catch (e) {
+      // 路径不存在，继续尝试下一个
+    }
+  }
+  
+  if (distPath) {
+    console.log(`静态文件服务路径: ${distPath}`);
+    app.use(express.static(distPath));
+    
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  } else {
+    console.log('警告: 未找到dist目录，静态文件服务未启用');
+  }
 }
 
 // 启动服务器
